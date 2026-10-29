@@ -1,10 +1,16 @@
 package repository.dao;
 
+import java.io.BufferedReader;
+
 import domain.User;
 import exception.DataAccessException;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class FileUserDaoImpl implements FileUserDao {
   private final File file;
@@ -35,7 +41,6 @@ public List<User> findAll() throws DataAccessException {
         }
         userLine = reader.readLine(); //salta a la siguiente linea, el i++
       }
-
       return (UserList);
     } catch (IOException e) {
       throw new DataAccessException("Error al leer usuario", e);
