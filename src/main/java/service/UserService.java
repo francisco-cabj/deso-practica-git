@@ -26,7 +26,7 @@ public class UserService {
 
   // Ejercicio 6
   public User getValidatedUser(String username, UserDao userDao)
-      throws UserNotFoundException, IncompleteUserException, DataAccessException {
+      throws UserNotFoundException, IncompleteUserException, DataAccessException{
     throw new UnsupportedOperationException("Ejercicio 6: implement getValidatedUser");
   }
 
