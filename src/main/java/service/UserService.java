@@ -30,18 +30,18 @@ public class UserService {
     throw new UnsupportedOperationException("Ejercicio 6: implement getValidatedUser");
   }
 
-  // Ejercicio 9
+  // Ejercicio 9 (Parte B)
   public List<User> getUsersPresentInFileAndDao(FileUserDao fileUserDao, UserDao userDao) throws DataAccessException {    
     List<User> listaUsuario = fileUserDao.findAll(); //propaga la excepcion
     Iterator<User> userIterator = listaUsuario.iterator();
     User useri = null; 
         while (userIterator.hasNext()) {
           useri = userIterator.next(); 
-         try {
+         try{
              if ((userDao.findByUsername(useri.getUsername())).isEmpty()) {
             userIterator.remove(); 
           }
-         } finally {
+         }catch (DataAccessException ignore){
          }//ignora si hubo una excepcion y continua
 
         }
