@@ -39,7 +39,7 @@ public class UserService {
         while (userIterator.hasNext()) {
           useri = userIterator.next(); 
          try {
-             if ((userDao.findByUsername(useri.getUsername())).isEmpty()){
+             if ((userDao.findByUsername(useri.getUsername())).isEmpty()) {
             userIterator.remove(); 
           }
          } finally {
