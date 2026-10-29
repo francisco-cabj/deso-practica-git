@@ -14,7 +14,7 @@ suman en contra, aunque sus tests continúen fallando.
 - [ ] Ejercicio 6 — Búsqueda de usuario con validación de perfil completo
 - [ ] Ejercicio 7 — Creación de reserva con validación completa y manejo de fallo en persistencia
 - [ ] Ejercicio 8 — Detección de duplicados antes de persistir
-- [X] Ejercicio 9 — Lectura de archivo y cruce con DAO
+- [ ] Ejercicio 9 — Lectura de archivo y cruce con DAO
 - [ ] Ejercicio 10 — Exportación de reservas a CSV
 - [ ] Ejercicio 11 — Resumen por usuario con estadísticas de reservas
 - [ ] Ejercicio 12 — Validación por lotes con acumulación de errores
