@@ -35,7 +35,7 @@ public class UserService {
   public List<User> getUsersPresentInFileAndDao(FileUserDao fileUserDao, UserDao userDao) throws DataAccessException {    
     List<User> listaUsuario = fileUserDao.findAll(); //propaga la excepcion
     Iterator<User> userIterator = listaUsuario.iterator();
-    User useri; 
+    User useri = null; 
         while (userIterator.hasNext()) {
           useri = userIterator.next(); 
          try {

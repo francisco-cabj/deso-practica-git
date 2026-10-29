@@ -30,7 +30,7 @@ public List<User> findAll() throws DataAccessException {
       String userLine = reader.readLine();
       UUID userid = null;
       String username = null;
-      ArrayList<User> UserList = new ArrayList<>();
+      ArrayList<User> UserList = new ArrayList<User>();
       while (userLine != null) {//haya contenido para leer
        String[] data = userLine.split(" "); //data[0] = UUID , data[1] == Nombre , split separa el string en 2, ver user.txt
       if (data.length > 1) {
