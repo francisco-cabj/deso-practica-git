@@ -6,6 +6,8 @@ import exception.IncompleteUserException;
 import exception.UserNotFoundException;
 import repository.dao.FileUserDao;
 import repository.dao.UserDao;
+
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,20 +32,26 @@ public class UserService {
   }
 
   // Ejercicio 9 (Parte B)
-  public List<User> getUsersPresentInFileAndDao(FileUserDao fileUserDao, UserDao userDao) throws DataAccessException {    
-    List<User> listaUsuario = fileUserDao.findAll(); //propaga la excepcion
-    Iterator<User> userIterator = listaUsuario.iterator();
-    User useri = null; 
-        while (userIterator.hasNext()) {
-          useri = userIterator.next(); 
-         try{
-             if ((userDao.findByUsername(useri.getUsername())).isEmpty()) {
-            userIterator.remove(); 
+public List<User> getUsersPresentInFileAndDao(FileUserDao fileUserDao, UserDao userDao) {
+      // Return an empty list if no users exist in fileUserDao
+      List<User> listaUsuario = fileUserDao.findAll();
+      if (listaUsuario == null || listaUsuario.isEmpty()) {
+          return Collections.emptyList();
+      }
+      
+      Iterator<User> userIterator = listaUsuario.iterator();
+      while (userIterator.hasNext()) {
+          User useri = userIterator.next(); 
+          try {
+              // Remove the user if they are not present in userDao (empty result)
+              if (userDao.findByUsername(useri.getUsername()).isEmpty()) {
+                  userIterator.remove(); 
+              }
+          } catch (DataAccessException e) {
+              // Ignore/remove the user if userDao throws a DataAccessException for that user
+              userIterator.remove();
           }
-         }catch (DataAccessException ignore){
-         }//ignora si hubo una excepcion y continua
-
-        }
-        return (listaUsuario);
+      }
+      return (listaUsuario);
   }
 }
