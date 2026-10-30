@@ -47,7 +47,11 @@ public List<User> getUsersPresentInFileAndDao(FileUserDao fileUserDao, UserDao u
               if (userDao.findByUsername(useri.getUsername()).isEmpty()) {
                   userIterator.remove(); 
               }
+<<<<<<< HEAD
           } catch (DataAccessException ignore) {
+=======
+          } catch (DataAccessException e) {
+>>>>>>> 097f8c03628b661927ef99407f5cbc858aac5944
               // Ignore/remove the user if userDao throws a DataAccessException for that user
               userIterator.remove();
           }
