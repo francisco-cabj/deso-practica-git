@@ -10,6 +10,8 @@ import repository.dao.UserDao;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.ArrayList;
 
 public class UserService {
   private final UserDao userDao;
@@ -32,21 +34,20 @@ public class UserService {
   }
 
   // Ejercicio 9 (Parte B)
-public List<User> getUsersPresentInFileAndDao(FileUserDao fileUserDao, UserDao userDao) throws DataAccessException {
-    List<User> listaUsuario = fileUserDao.findAll(); //propaga la excepcion
-    Iterator<User> userIterator = listaUsuario.iterator();
-    User useri = null; 
-        while (userIterator.hasNext()) {
-            useri = userIterator.next(); 
-        try{
-            if ((userDao.findByUsername(useri.getUsername())).isEmpty()) {
-                userIterator.remove();
-            }
-        }catch (DataAccessException ignore){
-            userIterator.remove();
-        }//ignora si hubo una excepcion y continua
-
-        }
-        return (listaUsuario);
+public List<User> getUsersPresentInFileAndDao(FileUserDao fileUserDao, UserDao userDao) {
+    List<User> listaUsuaio = fileUserDao.findAll(); //propaga la excepcion
+    List<User> result = new ArrayList<>();
+    if (listaUsuaio == null || listaUsuaio.isEmpty()) {
+        return result;
     }
+    for (User fileUser : listaUsuaio) {
+        try {
+            Optional<User> dbUser = userDao.findByUsername(fileUser.getUsername());
+            if (dbUser.isPresent()) { result.add(dbUser.get()); }
+        } catch (DataAccessException e) {
+            // Se ignora el usuario puntual si falla la consulta en UserDao
+        }
+    }
+
+    return result;
 }
