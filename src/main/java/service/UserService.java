@@ -1,5 +1,4 @@
 package service;
-
 import domain.User;
 import dto.user.UserResponse;
 import exception.DataAccessException;
@@ -8,7 +7,11 @@ import exception.UserNotFoundException;
 import repository.dao.FileUserDao;
 import repository.dao.UserDao;
 
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.ArrayList;
 
 public class UserService {
   private final UserDao userDao;
@@ -30,9 +33,22 @@ public class UserService {
     throw new UnsupportedOperationException("Ejercicio 6: implement getValidatedUser");
   }
 
-  // Ejercicio 9
-  public List<User> getUsersPresentInFileAndDao(FileUserDao fileUserDao, UserDao userDao)
-      throws DataAccessException {
-    throw new UnsupportedOperationException("Ejercicio 9: implement getUsersPresentInFileAndDao");
-  }
+  // Ejercicio 9 (Parte B)
+public List<User> getUsersPresentInFileAndDao(FileUserDao fileUserDao, UserDao userDao) throws DataAccessException {
+    List<User> listaUsuaio = fileUserDao.findAll(); //propaga la excepcion
+    List<User> result = new ArrayList<>();
+    if (listaUsuaio == null || listaUsuaio.isEmpty()) {
+        return result;
+    }
+    for (User fileUser : listaUsuaio) {
+        try {
+            Optional<User> dbUser = userDao.findByUsername(fileUser.getUsername());
+            if (dbUser.isPresent()) { result.add(dbUser.get()); }
+        } catch (DataAccessException e) {
+            // Se ignora el usuario puntual si falla la consulta en UserDao
+        }
+    }
+
+    return result;
+}
 }
