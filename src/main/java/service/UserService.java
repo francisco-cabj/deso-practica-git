@@ -34,7 +34,7 @@ public class UserService {
   }
 
   // Ejercicio 9 (Parte B)
-public List<User> getUsersPresentInFileAndDao(FileUserDao fileUserDao, UserDao userDao) {
+public List<User> getUsersPresentInFileAndDao(FileUserDao fileUserDao, UserDao userDao) throws DataAccessException {
     List<User> listaUsuaio = fileUserDao.findAll(); //propaga la excepcion
     List<User> result = new ArrayList<>();
     if (listaUsuaio == null || listaUsuaio.isEmpty()) {
