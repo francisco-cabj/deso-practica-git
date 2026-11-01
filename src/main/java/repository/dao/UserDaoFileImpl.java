@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
-public class UserDaoFileImpl implements UserDao {
+public class UserDaoFileImpl implements UserDao{
   private static UserDaoFileImpl instance;
   private final File file = new File("users.txt");
 
