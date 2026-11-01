@@ -101,5 +101,3 @@ private static class StoredService extends TouristService {
         return 0;
     }
 }
-  }
-}
